@@ -1,0 +1,37 @@
+dose_constraints:
+  - name: "Low Dose"
+    max_dose: 1.0
+    materials:
+      - name: "Lead"
+        thickness_mm: 10
+      - name: "Concrete"
+        thickness_mm: 50
+  - name: "Moderate Dose"
+    max_dose: 0.5
+    materials:
+      - name: "Lead"
+        thickness_mm: 20
+      - name: "Concrete"
+        thickness_mm: 30
+  - name: "High Dose"
+    max_dose: 0.1
+    materials:
+      - name: "Lead"
+        thickness_mm: 30
+      - name: "Concrete"
+        thickness_mm: 20
+
+source:
+  type: "mono-energetic"
+  energy_MeV: 1.0
+
+area:
+  width_m: 1.0
+  height_m: 1.0
+
+output:
+  plots:
+    - type: "dose_vs_thickness"
+      filename: "dose_vs_thickness.png"
+    - type: "residuals"
+      filename: "residuals.png"

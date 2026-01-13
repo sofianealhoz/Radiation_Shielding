@@ -1,0 +1,6 @@
+material,thickness_mm,density_g_cm3,mu_cm1
+Lead,10,11.34,0.112
+Concrete,20,2.4,0.057
+Steel,15,7.85,0.1
+Aluminum,5,2.7,0.2
+Polyethylene,30,0.94,0.1

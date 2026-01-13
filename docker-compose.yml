@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  shield-lite:
+    build: .
+    image: shield-lite:latest
+    volumes:
+      # Monte le dossier examples pour récupérer les plots générés (PNG)
+      # et pour pouvoir modifier les fichiers de config sans reconstruire l'image
+      - ./examples:/app/examples
+    # Commande par défaut pour garder le conteneur actif si besoin, 
+    # ou pour lancer un script spécifique. Ici on surcharge l'entrypoint pour le dev.
+    entrypoint: []
+    command: /bin/bash
+  
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=postgresql://shield_user:shield_pass@db:5432/shield_db
+    depends_on:
+      - db
+    networks:
+      - shield-net
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_USER=shield_user
+      - POSTGRES_PASSWORD=shield_pass
+      - POSTGRES_DB=shield_db
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - shield-net
+
+volumes:
+  postgres_data:
+
+networks:
+  shield-net:
+    driver: bridge
