@@ -1,0 +1,6 @@
+torch
+pytorch-lightning  # Pour structurer le code proprement (Standard MLOps)
+pandas
+scikit-learn
+sqlalchemy
+psycopg2-binary
